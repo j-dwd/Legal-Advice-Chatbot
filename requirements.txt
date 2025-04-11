@@ -16,7 +16,7 @@ requests>=2.32.3
 beautifulsoup4>=4.12.3
 pyswip>=0.2.10
 python-dotenv>=1.0.1
-google-genai==1.0.0
+google-genai>=1.0.4
 lime==0.2.0.1
 loguru==0.7.2
 drools-jpy==0.3.9
