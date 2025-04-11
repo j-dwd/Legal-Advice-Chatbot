@@ -14,7 +14,7 @@ from logger import setup_logger
 # Load environment and logger
 load_dotenv()
 logger = setup_logger()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("AIzaSyB3buhIbbp9OYRs-oPq2ytsZeHoZdAuhnQ")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Load models
@@ -28,7 +28,7 @@ explainer = LimeTextExplainer(class_names=["Not Audit Clause", "Audit Clause"])
 # Streamlit setup
 st.set_page_config(page_title="Legal Advice Chatbot", layout="wide")
 st.title("Legal Advice Chatbot")
-st.markdown("Analyze contracts with RoBERTa and GPT-4o.")
+st.markdown("Analyze contracts with BERT and Gemini.")
 
 # Session state
 if "messages" not in st.session_state:
