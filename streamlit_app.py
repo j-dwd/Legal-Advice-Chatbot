@@ -4,13 +4,14 @@ import streamlit as st
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 from lime.lime_text import LimeTextExplainer
-from google.genai import GenerativeModel
+import google.generativeai as genai  # Correct import for generative AI
 from dotenv import load_dotenv
 import os
 import numpy as np
 from loguru import logger
 from src.multimodal_processor import process_multimodal_input, enhance_ocr_text
 from src.rule_engine import apply_advanced_rules
+
 try:
     from src.utils import extract_legal_entities
     from src.logger import setup_logger
@@ -25,12 +26,21 @@ logger = setup_logger()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     logger.error("GEMINI_API_KEY not found in .env file")
-    st.error("Gemini API key missing. Please set GEMINI_API_KEY in .env.")
+    st.error("Gemini API key missing. Please set GEMINI_API_KEY in .env or Streamlit secrets.")
+    st.stop()
+
+# Configure the API key globally for google-generativeai
+try:
+    genai.configure(api_key=GEMINI_API_KEY)
+    logger.info("Gemini API configured successfully")
+except Exception as e:
+    logger.error(f"Gemini API configuration failed: {e}")
+    st.error(f"Failed to configure Gemini API: {e}")
     st.stop()
 
 # Initialize Gemini model
 try:
-    gemini_model = GenerativeModel(api_key=GEMINI_API_KEY, model_name='gemini-2.0-pro')
+    gemini_model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest")  # Use supported model
     logger.info("Gemini model initialized successfully")
 except Exception as e:
     logger.error(f"Gemini initialization failed: {e}")
@@ -164,3 +174,6 @@ if user_input or data:
             except Exception as e:
                 logger.error(f"Analysis error: {str(e)}")
                 st.error(f"Error during analysis: {str(e)}")
+
+# Add disclaimer
+st.write("**Disclaimer**: This chatbot provides general information only and is not a substitute for professional legal advice. Always consult a licensed attorney.")
