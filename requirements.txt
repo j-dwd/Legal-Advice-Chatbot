@@ -1,0 +1,18 @@
+transformers>=4.45.0
+torch==2.6.0
+torchvision==0.21.0
+streamlit>=1.38.0
+pandas>=2.2.3
+numpy>=1.26.4,<2.0  # Avoids NumPy 2.x conflicts
+scikit-learn>=1.5.2
+pytesseract>=0.3.10
+pillow>=10.4.0
+pdf2image>=1.17.0
+opacus>=1.5.1
+# pyreason  # Commented out due to repository issue
+sentence-transformers>=3.0.1
+openai>=1.50.0
+requests>=2.32.3
+beautifulsoup4>=4.12.3
+pyswip>=0.2.10
+python-dotenv>=1.0.1

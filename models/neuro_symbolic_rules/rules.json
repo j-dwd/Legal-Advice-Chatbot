@@ -1,0 +1,7 @@
+{
+    "rules": [
+      {"if": {"contract_text": "contains high-risk"}, "then": {"risk": 0.9}},
+      {"if": {"contract_text": "contains low-risk"}, "then": {"risk": 0.2}},
+      {"default": {"risk": 0.5}}
+    ]
+  }
